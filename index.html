@@ -3,517 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Qaraqalpaq Tili: Qosımtalar</title>
+    <title>Qaraqalpaq Tili – Qosımtalar</title>
+
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
     <style>
-        body {
-            font-family: 'Nunito', sans-serif;
-            background-color: #f0f9ff;
-        }
-        .fade-in {
-            animation: fadeIn 0.5s ease-in;
-        }
+        body { font-family: 'Nunito', sans-serif; }
+        .fade-in { animation: fadeIn .4s ease-in; }
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {opacity:0; transform:translateY(10px)}
+            to {opacity:1; transform:translateY(0)}
         }
         .tab-active {
             border-bottom: 3px solid #0284c7;
             color: #0284c7;
             font-weight: bold;
         }
-        .card-hover:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-        }
     </style>
 </head>
-<body class="text-gray-800 flex flex-col min-h-screen">
 
-    <!-- Navigation -->
-    <nav class="bg-sky-600 text-white shadow-lg sticky top-0 z-50">
-        <div class="max-w-6xl mx-auto px-4">
-            <div class="flex justify-between items-center h-16">
-                <div class="flex items-center space-x-2">
-                    <i class="fas fa-book-open text-2xl"></i>
-                    <span class="font-bold text-xl">Qaraqalpaq Tili</span>
-                </div>
-                <div class="hidden md:flex space-x-8">
-                    <a href="#home" onclick="showSection('home')" class="hover:text-sky-200 transition">Bas bet</a>
-                    <a href="#theory" onclick="showSection('theory')" class="hover:text-sky-200 transition">Qosımtalar</a>
-                    <a href="#quiz" onclick="showSection('quiz')" class="hover:text-sky-200 transition">Test</a>
-                </div>
-                <!-- Mobile Menu Button -->
-                <div class="md:hidden">
-                    <button onclick="toggleMobileMenu()" class="text-white focus:outline-none">
-                        <i class="fas fa-bars text-2xl"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-sky-700 pb-4">
-            <a href="#home" onclick="showSection('home'); toggleMobileMenu()" class="block px-4 py-2 hover:bg-sky-600">Bas bet</a>
-            <a href="#theory" onclick="showSection('theory'); toggleMobileMenu()" class="block px-4 py-2 hover:bg-sky-600">Qosımtalar</a>
-            <a href="#quiz" onclick="showSection('quiz'); toggleMobileMenu()" class="block px-4 py-2 hover:bg-sky-600">Test</a>
-        </div>
-    </nav>
+<body class="bg-sky-50 min-h-screen">
 
-    <!-- Main Content -->
-    <main class="flex-grow container mx-auto px-4 py-8">
-        
-        <!-- HOME SECTION -->
-        <section id="home-section" class="fade-in block">
-            <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
-                <div class="md:flex">
-                    <div class="md:w-1/2 p-8 flex flex-col justify-center bg-gradient-to-br from-sky-50 to-white">
-                        <h1 class="text-4xl font-extrabold text-sky-700 mb-4">Qosımtalar dúnyasına xosh keldińiz!</h1>
-                        <p class="text-lg text-gray-600 mb-6">
-                            Qaraqalpaq tilindegi qosımtalardı úyreniw ańsat hám qızıqlı. 
-                            Bul sabaqta biz sóz jasawshı hám sóz túrlewshi qosımtalardı kórip shıǵamız.
-                        </p>
-                        <div class="flex space-x-4">
-                            <button onclick="showSection('theory')" class="bg-sky-600 text-white px-6 py-3 rounded-lg shadow hover:bg-sky-700 transition flex items-center">
-                                <i class="fas fa-book mr-2"></i> Sabaqtı baslaw
-                            </button>
-                            <button onclick="showSection('quiz')" class="bg-green-500 text-white px-6 py-3 rounded-lg shadow hover:bg-green-600 transition flex items-center">
-                                <i class="fas fa-puzzle-piece mr-2"></i> Test islew
-                            </button>
-                        </div>
-                    </div>
-                    <div class="md:w-1/2 bg-sky-100 flex items-center justify-center p-8">
-                         <div class="text-center">
-                            <div class="text-9xl text-sky-300 mb-4">
-                                <i class="fas fa-shapes"></i>
-                            </div>
-                            <p class="font-bold text-sky-800 text-xl">Túbir + Qosımta = Jańa máni</p>
-                         </div>
-                    </div>
-                </div>
-            </div>
+<!-- NAV -->
+<nav class="bg-sky-600 text-white p-4 flex justify-between">
+    <span class="font-bold text-xl">Qaraqalpaq Tili</span>
+    <div class="space-x-4">
+        <button onclick="showSection('home')">Bas bet</button>
+        <button onclick="showSection('theory')">Qosımtalar</button>
+        <button onclick="showSection('quiz')">Test</button>
+    </div>
+</nav>
 
-            <!-- Quick Stats/Info -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-                <div class="bg-white p-6 rounded-xl shadow border-l-4 border-blue-500 card-hover">
-                    <div class="flex items-center mb-2">
-                        <div class="bg-blue-100 p-3 rounded-full mr-4 text-blue-600">
-                            <i class="fas fa-plus"></i>
-                        </div>
-                        <h3 class="font-bold text-lg">Sóz jasawshı</h3>
-                    </div>
-                    <p class="text-gray-600">Sózge jańa máni berip, jańa sóz jasaydı. Mısalı: <i>Balıq</i> -> <i>Balıq<b>shı</b></i>.</p>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow border-l-4 border-green-500 card-hover">
-                    <div class="flex items-center mb-2">
-                        <div class="bg-green-100 p-3 rounded-full mr-4 text-green-600">
-                            <i class="fas fa-layer-group"></i>
-                        </div>
-                        <h3 class="font-bold text-lg">Kópshilik</h3>
-                    </div>
-                    <p class="text-gray-600">Zattıń birewden kóp ekenligin bildiredi. Mısalı: <i>Kitap</i> -> <i>Kitap<b>lar</b></i>.</p>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow border-l-4 border-yellow-500 card-hover">
-                    <div class="flex items-center mb-2">
-                        <div class="bg-yellow-100 p-3 rounded-full mr-4 text-yellow-600">
-                            <i class="fas fa-link"></i>
-                        </div>
-                        <h3 class="font-bold text-lg">Septikler</h3>
-                    </div>
-                    <p class="text-gray-600">Sózlerdi bir-biri menen baylanıstıradı. Mısalı: <i>Mektep</i> -> <i>Mektep<b>ke</b></i>.</p>
-                </div>
-            </div>
-        </section>
+<!-- MAIN -->
+<main class="max-w-5xl mx-auto p-6">
 
-        <!-- THEORY SECTION -->
-        <section id="theory-section" class="fade-in hidden">
-            <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Qosımtalar túrleri</h2>
-            
-            <!-- Tabs -->
-            <div class="flex justify-center border-b mb-6 overflow-x-auto">
-                <button onclick="switchTab('soz-jasawshi')" id="tab-soz-jasawshi" class="px-6 py-3 text-lg font-medium transition whitespace-nowrap tab-active">
-                    Sóz jasawshı
-                </button>
-                <button onclick="switchTab('soz-turlewshi')" id="tab-soz-turlewshi" class="px-6 py-3 text-lg font-medium text-gray-500 hover:text-sky-600 transition whitespace-nowrap">
-                    Sóz túrlewshi
-                </button>
-                <button onclick="switchTab('septikler')" id="tab-septikler" class="px-6 py-3 text-lg font-medium text-gray-500 hover:text-sky-600 transition whitespace-nowrap">
-                    Septikler
-                </button>
-            </div>
+<!-- HOME -->
+<section id="home-section" class="fade-in">
+    <h1 class="text-3xl font-bold text-sky-700 mb-4">
+        Qosımtalar dúnyasına xosh keldińiz!
+    </h1>
+    <p class="mb-6">
+        Qaraqalpaq tilindegi qosımtalardı ańsat hám qızıqlı túrde úyrenemiz.
+    </p>
+    <button onclick="showSection('quiz')" class="bg-sky-600 text-white px-6 py-3 rounded">
+        Testti baslaw
+    </button>
+</section>
 
-            <!-- Tab Content: Soz Jasawshi -->
-            <div id="content-soz-jasawshi" class="bg-white rounded-xl shadow-lg p-8">
-                <div class="flex items-start">
-                    <div class="bg-orange-100 p-4 rounded-full mr-6 hidden md:block">
-                        <i class="fas fa-magic text-2xl text-orange-600"></i>
-                    </div>
-                    <div>
-                        <h3 class="text-2xl font-bold mb-4 text-gray-800">Sóz jasawshı qosımtalar</h3>
-                        <p class="mb-4 text-lg">Bul qosımtalar túbir sózge jalǵanıp, onnan pútkilley jańa mánige iye bolǵan basqa sóz jasaydı.</p>
-                        
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
-                            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                                <span class="font-bold text-sky-600 text-xl">-shı / -shi</span>
-                                <p class="mt-2 text-gray-600">Kásip-óner atların jasaydı.</p>
-                                <ul class="mt-2 space-y-1">
-                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Etik + <b>shi</b> = Etikshi</li>
-                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Qoy + <b>shı</b> = Qoyshı</li>
-                                </ul>
-                            </div>
-                            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                                <span class="font-bold text-sky-600 text-xl">-lıq / -lik</span>
-                                <p class="mt-2 text-gray-600">Zatlıq at yaki sapalıq máni bildiredi.</p>
-                                <ul class="mt-2 space-y-1">
-                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Dos + <b>lıq</b> = Doslıq</li>
-                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Tegis + <b>lik</b> = Tegislik</li>
-                                </ul>
-                            </div>
-                            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                                <span class="font-bold text-sky-600 text-xl">-sız / -siz</span>
-                                <p class="mt-2 text-gray-600">Joqlıq mánisin bildiredi.</p>
-                                <ul class="mt-2 space-y-1">
-                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Suw + <b>sız</b> = Suwsız</li>
-                                    <li><i class="fas fa-check text-green-500 mr-2"></i>Bilim + <b>siz</b> = Bilimsiz</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<!-- THEORY -->
+<section id="theory-section" class="hidden fade-in">
+    <h2 class="text-2xl font-bold mb-4">Qosımtalar túrleri</h2>
+    <ul class="list-disc pl-6 space-y-2">
+        <li><b>Sóz jasawshı:</b> balıq → balıqshı</li>
+        <li><b>Kópshilik:</b> kitap → kitaplar</li>
+        <li><b>Septik:</b> mektep → mektepke</li>
+    </ul>
+</section>
 
-            <!-- Tab Content: Soz Turlewshi -->
-            <div id="content-soz-turlewshi" class="hidden bg-white rounded-xl shadow-lg p-8">
-                <div class="flex items-start">
-                    <div class="bg-purple-100 p-4 rounded-full mr-6 hidden md:block">
-                        <i class="fas fa-random text-2xl text-purple-600"></i>
-                    </div>
-                    <div>
-                        <h3 class="text-2xl font-bold mb-4 text-gray-800">Sóz túrlewshi qosımtalar</h3>
-                        <p class="mb-4 text-lg">Sózdiń leksikalıq mánisin ózgertpeydi, tek onıń grammatikalıq formasın ózgertedi.</p>
-                        
-                        <div class="mb-6">
-                            <h4 class="text-xl font-bold text-purple-700 mb-2">Kópshilik jalǵawı (-lar / -ler)</h4>
-                            <div class="bg-purple-50 p-4 rounded-lg border-l-4 border-purple-500">
-                                <p class="mb-2">Juwın dawıslılarǵa <b>-lar</b>, jińishke dawıslılarǵa <b>-ler</b> jalǵanadı.</p>
-                                <div class="grid grid-cols-2 gap-4">
-                                    <div>
-                                        <p class="font-bold">Qatatań:</p>
-                                        <p>Alma -> Alma<b>lar</b></p>
-                                        <p>Oqıwshı -> Oqıwshı<b>lar</b></p>
-                                    </div>
-                                    <div>
-                                        <p class="font-bold">Jińishke:</p>
-                                        <p>Keme -> Keme<b>ler</b></p>
-                                        <p>Múǵallim -> Múǵallim<b>ler</b></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+<!-- QUIZ -->
+<section id="quiz-section" class="hidden fade-in">
+    <h2 class="text-2xl font-bold mb-4">Bilimińizdi sınań</h2>
 
-                        <div>
-                            <h4 class="text-xl font-bold text-purple-700 mb-2">Táweldik jalǵawları (Meniń, seniń...)</h4>
-                            <div class="overflow-x-auto">
-                                <table class="min-w-full bg-white border border-gray-200 rounded-lg">
-                                    <thead class="bg-gray-100">
-                                        <tr>
-                                            <th class="py-2 px-4 border-b text-left">Bet</th>
-                                            <th class="py-2 px-4 border-b text-left">Birlik</th>
-                                            <th class="py-2 px-4 border-b text-left">Mısal (Qol)</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td class="py-2 px-4 border-b">I bet (Men)</td>
-                                            <td class="py-2 px-4 border-b">-ım / -im</td>
-                                            <td class="py-2 px-4 border-b">Qol<b>ım</b></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="py-2 px-4 border-b">II bet (Sen)</td>
-                                            <td class="py-2 px-4 border-b">-ıń / -iń</td>
-                                            <td class="py-2 px-4 border-b">Qol<b>ıń</b></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="py-2 px-4 border-b">III bet (Ol)</td>
-                                            <td class="py-2 px-4 border-b">-ı / -i</td>
-                                            <td class="py-2 px-4 border-b">Qol<b>ı</b></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <div id="quiz-box" class="bg-white p-6 rounded shadow">
+        <p id="question" class="font-bold mb-4"></p>
+        <div id="answers" class="space-y-2"></div>
+        <button onclick="nextQuestion()" class="mt-4 bg-green-500 text-white px-4 py-2 rounded">
+            Keyingi
+        </button>
+    </div>
 
-            <!-- Tab Content: Septikler -->
-            <div id="content-septikler" class="hidden bg-white rounded-xl shadow-lg p-8">
-                <div class="flex items-start">
-                    <div class="bg-indigo-100 p-4 rounded-full mr-6 hidden md:block">
-                        <i class="fas fa-project-diagram text-2xl text-indigo-600"></i>
-                    </div>
-                    <div>
-                        <h3 class="text-2xl font-bold mb-4 text-gray-800">Septik jalǵawları</h3>
-                        <p class="mb-4 text-lg">Qaraqalpaq tilinde 6 septik bar. Olar sózlerdi baylanıstıradı.</p>
-                        
-                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                            <div class="bg-white border rounded p-3 shadow-sm">
-                                <h4 class="font-bold text-indigo-600">1. Ataw (Kim? Ne?)</h4>
-                                <p class="text-sm text-gray-600">Jalǵawı joq.</p>
-                                <p class="mt-1 font-medium">Kitap stolda tur.</p>
-                            </div>
-                            <div class="bg-white border rounded p-3 shadow-sm">
-                                <h4 class="font-bold text-indigo-600">2. İlik (Kimniń? Neniń?)</h4>
-                                <p class="text-sm text-gray-600">-nıń, -niń, -dıń, -tiń...</p>
-                                <p class="mt-1 font-medium">Mektep<b>tiń</b> hawlısı.</p>
-                            </div>
-                            <div class="bg-white border rounded p-3 shadow-sm">
-                                <h4 class="font-bold text-indigo-600">3. Barıs (Kimge? Nege?)</h4>
-                                <p class="text-sm text-gray-600">-ǵa, -ge, -qa, -ke, -na, -ne</p>
-                                <p class="mt-1 font-medium">Qala<b>ǵa</b> baraman.</p>
-                            </div>
-                            <div class="bg-white border rounded p-3 shadow-sm">
-                                <h4 class="font-bold text-indigo-600">4. Tabıs (Kimdi? Neni?)</h4>
-                                <p class="text-sm text-gray-600">-nı, -ni, -dı, -ti...</p>
-                                <p class="mt-1 font-medium">Nan<b>dı</b> al.</p>
-                            </div>
-                            <div class="bg-white border rounded p-3 shadow-sm">
-                                <h4 class="font-bold text-indigo-600">5. Shıǵıs (Kimnen? Neden?)</h4>
-                                <p class="text-sm text-gray-600">-nan, -nen, -dan, -ten...</p>
-                                <p class="mt-1 font-medium">Jumıs<b>tan</b> qayttım.</p>
-                            </div>
-                            <div class="bg-white border rounded p-3 shadow-sm">
-                                <h4 class="font-bold text-indigo-600">6. Orın (Kimde? Nede?)</h4>
-                                <p class="text-sm text-gray-600">-da, -de, -ta, -te, -nda</p>
-                                <p class="mt-1 font-medium">Úy<b>de</b> otırman.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <div id="result" class="hidden text-center mt-6">
+        <h3 class="text-xl font-bold mb-2">Natıja</h3>
+        <p id="score"></p>
+        <button onclick="restartQuiz()" class="mt-4 bg-sky-600 text-white px-4 py-2 rounded">
+            Qayta baslaw
+        </button>
+    </div>
+</section>
 
-        <!-- QUIZ SECTION -->
-        <section id="quiz-section" class="fade-in hidden">
-            <div class="max-w-2xl mx-auto">
-                <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
-                    <div class="bg-sky-600 p-6 text-white text-center">
-                        <h2 class="text-3xl font-bold"><i class="fas fa-brain mr-2"></i>Bilimińizdi sınań!</h2>
-                        <p class="mt-2 text-sky-100">Durıs juwaptı tańlań.</p>
-                    </div>
+</main>
 
-                    <div id="quiz-container" class="p-8">
-                        <!-- Score Board -->
-                        <div class="flex justify-between items-center mb-6 text-sm font-bold text-gray-500">
-                            <span id="question-counter">Soraw: 1 / 5</span>
-                            <span id="score-counter" class="text-green-600">Durası: 0</span>
-                        </div>
+<!-- SCRIPT -->
+<script>
+const sections = ['home','theory','quiz'];
 
-                        <!-- Question -->
-                        <div class="mb-8">
-                            <h3 id="question-text" class="text-2xl font-bold text-gray-800 text-center"></h3>
-                        </div>
+function showSection(name){
+    sections.forEach(s=>{
+        document.getElementById(s+'-section').classList.add('hidden');
+    });
+    document.getElementById(name+'-section').classList.remove('hidden');
+}
 
-                        <!-- Options -->
-                        <div id="options-container" class="space-y-3">
-                            <!-- Options will be injected via JS -->
-                        </div>
-                        
-                        <!-- Next Button -->
-                        <button id="next-btn" onclick="nextQuestion()" class="mt-8 w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-3 px-6 rounded-lg hidden transition">
-                            Keyingi soraw
-                        </button>
-                    </div>
+/* QUIZ DATA */
+const quiz = [
+    {
+        q: "Balıqshı sózinde qaysı qosımta bar?",
+        a: ["-lar","-shı","-lıq"],
+        c: 1
+    },
+    {
+        q: "Kitaplar sózindegi qosımta?",
+        a: ["-lar","-shı","-siz"],
+        c: 0
+    },
+    {
+        q: "Suwsız sózinde qosımta?",
+        a: ["-lıq","-sız","-lar"],
+        c: 1
+    }
+];
 
-                    <!-- Result Screen -->
-                    <div id="result-screen" class="hidden p-8 text-center">
-                        <div class="mb-6">
-                             <i class="fas fa-trophy text-6xl text-yellow-400"></i>
-                        </div>
-                        <h2 class="text-3xl font-bold text-gray-800 mb-2">Test juwmaqlandı!</h2>
-                        <p class="text-xl text-gray-600 mb-6">Sizdiń nátiyjeńiz: <span id="final-score" class="font-bold text-sky-600"></span></p>
-                        <button onclick="restartQuiz()" class="bg-sky-600 text-white px-8 py-3 rounded-lg hover:bg-sky-700 transition">
-                            Qaytadan baslaw
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </section>
+let i = 0;
+let score = 0;
 
-    </main>
+function loadQuestion(){
+    const q = quiz[i];
+    document.getElementById('question').innerText = q.q;
+    const answers = document.getElementById('answers');
+    answers.innerHTML = "";
+    q.a.forEach((text,idx)=>{
+        const btn = document.createElement("button");
+        btn.className = "block w-full border p-2 rounded hover:bg-sky-100";
+        btn.innerText = text;
+        btn.onclick = ()=>checkAnswer(idx);
+        answers.appendChild(btn);
+    });
+}
 
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-gray-400 py-8 mt-12">
-        <div class="container mx-auto px-4 text-center">
-            <p class="mb-2">Qaraqalpaq Tili Sabaǵı</p>
-            <p>&copy; 2024 Barlıq huqıqlar qorǵalǵan.</p>
-        </div>
-    </footer>
+function checkAnswer(ans){
+    if(ans === quiz[i].c) score++;
+}
 
-    <!-- JavaScript Implementation -->
-    <script>
-        // Navigation Logic
-        function showSection(sectionId) {
-            // Hide all sections
-            document.getElementById('home-section').classList.add('hidden');
-            document.getElementById('theory-section').classList.add('hidden');
-            document.getElementById('quiz-section').classList.add('hidden');
+function nextQuestion(){
+    i++;
+    if(i < quiz.length){
+        loadQuestion();
+    } else {
+        document.getElementById('quiz-box').classList.add('hidden');
+        document.getElementById('result').classList.remove('hidden');
+        document.getElementById('score').innerText =
+            `${score} / ${quiz.length} durıs juwap`;
+    }
+}
 
-            // Show selected section
-            if(sectionId === 'home') document.getElementById('home-section').classList.remove('hidden');
-            if(sectionId === 'theory') document.getElementById('theory-section').classList.remove('hidden');
-            if(sectionId === 'quiz') {
-                document.getElementById('quiz-section').classList.remove('hidden');
-                if(currentQuestionIndex === 0) loadQuestion(); // Start quiz if not started
-            }
-            
-            // Mobile menu scroll fix
-            window.scrollTo(0,0);
-        }
+function restartQuiz(){
+    i = 0; score = 0;
+    document.getElementById('result').classList.add('hidden');
+    document.getElementById('quiz-box').classList.remove('hidden');
+    loadQuestion();
+}
 
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
-        }
+loadQuestion();
+</script>
 
-        // Tab Logic
-        function switchTab(tabId) {
-            // Reset buttons
-            const buttons = ['soz-jasawshi', 'soz-turlewshi', 'septikler'];
-            buttons.forEach(id => {
-                document.getElementById(`tab-${id}`).classList.remove('tab-active', 'text-sky-600');
-                document.getElementById(`tab-${id}`).classList.add('text-gray-500');
-                document.getElementById(`content-${id}`).classList.add('hidden');
-            });
-
-            // Activate current
-            document.getElementById(`tab-${tabId}`).classList.add('tab-active', 'text-sky-600');
-            document.getElementById(`tab-${tabId}`).classList.remove('text-gray-500');
-            document.getElementById(`content-${tabId}`).classList.remove('hidden');
-        }
-
-        // Quiz Logic
-        const questions = [
-            {
-                question: "\"Bilim\" sózine qaysı qosımta jalǵansa \"adam\" mánisin bildiredi?",
-                options: ["-li", "-siz", "-paz", "-dan"],
-                correct: 2, // -paz (bilimpaz) usually, or strictly speaking -li (bilimli). Let's use a standard example.
-                // Let's change to a clearer example for standard grammar.
-                // "Balıq" -> "Balıqshı"
-            },
-            {
-                question: "\"Mektep\" sózine barıs septigi (-ǵa/-ge) jalǵansa qalay boladı?",
-                options: ["Mektepti", "Mektepte", "Mektepke", "Mektepten"],
-                correct: 2 // Mektepke
-            },
-            {
-                question: "\"Oqıwshı\" sóziniń kópshilik forması qaysı?",
-                options: ["Oqıwshıler", "Oqıwshılar", "Oqıwshıdar", "Oqıwshıtar"],
-                correct: 1 // Oqıwshılar
-            },
-            {
-                question: "\"Sóz jasawshı\" qosımta qaysı?",
-                options: ["-lar", "-nıń", "-shı", "-da"],
-                correct: 2 // -shı
-            },
-            {
-                question: "\"Meniń kitab...\" - bos orınǵa qaysı qosımta keledi?",
-                options: ["-ım", "-ıń", "-ı", "-ımız"],
-                correct: 0 // -ım
-            },
-            {
-                question: "Qaraqalpaq tilinde neshe septik bar?",
-                options: ["5", "6", "7", "4"],
-                correct: 1 // 6
-            }
-        ];
-
-        let currentQuestionIndex = 0;
-        let score = 0;
-
-        function loadQuestion() {
-            const q = questions[currentQuestionIndex];
-            document.getElementById('question-text').innerText = q.question;
-            document.getElementById('question-counter').innerText = `Soraw: ${currentQuestionIndex + 1} / ${questions.length}`;
-            
-            const optionsContainer = document.getElementById('options-container');
-            optionsContainer.innerHTML = '';
-
-            q.options.forEach((opt, index) => {
-                const btn = document.createElement('button');
-                btn.className = "w-full text-left p-4 rounded-lg border-2 border-gray-200 hover:border-sky-500 hover:bg-sky-50 transition font-medium text-lg";
-                btn.innerText = opt;
-                btn.onclick = () => checkAnswer(index, btn);
-                optionsContainer.appendChild(btn);
-            });
-
-            document.getElementById('next-btn').classList.add('hidden');
-        }
-
-        function checkAnswer(selectedIndex, btnElement) {
-            const q = questions[currentQuestionIndex];
-            const optionsContainer = document.getElementById('options-container');
-            const buttons = optionsContainer.getElementsByTagName('button');
-
-            // Disable all buttons
-            for(let btn of buttons) {
-                btn.disabled = true;
-                btn.classList.add('opacity-70', 'cursor-not-allowed');
-            }
-
-            if(selectedIndex === q.correct) {
-                btnElement.classList.remove('border-gray-200', 'hover:border-sky-500', 'hover:bg-sky-50');
-                btnElement.classList.add('bg-green-100', 'border-green-500', 'text-green-700');
-                btnElement.innerHTML += ' <i class="fas fa-check float-right mt-1"></i>';
-                score++;
-                document.getElementById('score-counter').innerText = `Durası: ${score}`;
-            } else {
-                btnElement.classList.remove('border-gray-200', 'hover:border-sky-500', 'hover:bg-sky-50');
-                btnElement.classList.add('bg-red-100', 'border-red-500', 'text-red-700');
-                btnElement.innerHTML += ' <i class="fas fa-times float-right mt-1"></i>';
-                
-                // Show correct answer
-                const correctBtn = buttons[q.correct];
-                correctBtn.classList.add('bg-green-100', 'border-green-500', 'text-green-700');
-            }
-
-            document.getElementById('next-btn').classList.remove('hidden');
-        }
-
-        function nextQuestion() {
-            currentQuestionIndex++;
-            if(currentQuestionIndex < questions.length) {
-                loadQuestion();
-            } else {
-                showResults();
-            }
-        }
-
-        function showResults() {
-            document.getElementById('quiz-container').classList.add('hidden');
-            document.getElementById('result-screen').classList.remove('hidden');
-            
-            const percentage = (score / questions.length) * 100;
-            let message = "";
-            if(percentage === 100) message = "Ayyar! Bárin bilesiz!";
-            else if(percentage >= 80) message = "Júdá jaqsı!";
-            else if(percentage >= 50) message = "Jaman emes, biraq taǵı oqıw kerek.";
-            else message = "Qaytadan oqıp shıǵıw kerek.";
-
-            document.getElementById('final-score').innerHTML = `${score} / ${questions.length}<br><span class="text-sm font-normal text-gray-500">${message}</span>`;
-        }
-
-        function restartQuiz() {
-            currentQuestionIndex = 0;
-            score = 0;
-            document.getElementById('score-counter').innerText = `Durası: 0`;
-            document.getElementById('result-screen').classList.add('hidden');
-            document.getElementById('quiz-container').classList.remove('hidden');
-            loadQuestion();
-        }
-
-    </script>
 </body>
 </html>
