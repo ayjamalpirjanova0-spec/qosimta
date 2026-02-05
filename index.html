@@ -307,4 +307,213 @@
                     <div id="quiz-container" class="p-8">
                         <!-- Score Board -->
                         <div class="flex justify-between items-center mb-6 text-sm font-bold text-gray-500">
-                            <span id="question-counter
+                            <span id="question-counter">Soraw: 1 / 5</span>
+                            <span id="score-counter" class="text-green-600">Durası: 0</span>
+                        </div>
+
+                        <!-- Question -->
+                        <div class="mb-8">
+                            <h3 id="question-text" class="text-2xl font-bold text-gray-800 text-center"></h3>
+                        </div>
+
+                        <!-- Options -->
+                        <div id="options-container" class="space-y-3">
+                            <!-- Options will be injected via JS -->
+                        </div>
+                        
+                        <!-- Next Button -->
+                        <button id="next-btn" onclick="nextQuestion()" class="mt-8 w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-3 px-6 rounded-lg hidden transition">
+                            Keyingi soraw
+                        </button>
+                    </div>
+
+                    <!-- Result Screen -->
+                    <div id="result-screen" class="hidden p-8 text-center">
+                        <div class="mb-6">
+                             <i class="fas fa-trophy text-6xl text-yellow-400"></i>
+                        </div>
+                        <h2 class="text-3xl font-bold text-gray-800 mb-2">Test juwmaqlandı!</h2>
+                        <p class="text-xl text-gray-600 mb-6">Sizdiń nátiyjeńiz: <span id="final-score" class="font-bold text-sky-600"></span></p>
+                        <button onclick="restartQuiz()" class="bg-sky-600 text-white px-8 py-3 rounded-lg hover:bg-sky-700 transition">
+                            Qaytadan baslaw
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-400 py-8 mt-12">
+        <div class="container mx-auto px-4 text-center">
+            <p class="mb-2">Qaraqalpaq Tili Sabaǵı</p>
+            <p>&copy; 2024 Barlıq huqıqlar qorǵalǵan.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Implementation -->
+    <script>
+        // Navigation Logic
+        function showSection(sectionId) {
+            // Hide all sections
+            document.getElementById('home-section').classList.add('hidden');
+            document.getElementById('theory-section').classList.add('hidden');
+            document.getElementById('quiz-section').classList.add('hidden');
+
+            // Show selected section
+            if(sectionId === 'home') document.getElementById('home-section').classList.remove('hidden');
+            if(sectionId === 'theory') document.getElementById('theory-section').classList.remove('hidden');
+            if(sectionId === 'quiz') {
+                document.getElementById('quiz-section').classList.remove('hidden');
+                if(currentQuestionIndex === 0) loadQuestion(); // Start quiz if not started
+            }
+            
+            // Mobile menu scroll fix
+            window.scrollTo(0,0);
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Tab Logic
+        function switchTab(tabId) {
+            // Reset buttons
+            const buttons = ['soz-jasawshi', 'soz-turlewshi', 'septikler'];
+            buttons.forEach(id => {
+                document.getElementById(`tab-${id}`).classList.remove('tab-active', 'text-sky-600');
+                document.getElementById(`tab-${id}`).classList.add('text-gray-500');
+                document.getElementById(`content-${id}`).classList.add('hidden');
+            });
+
+            // Activate current
+            document.getElementById(`tab-${tabId}`).classList.add('tab-active', 'text-sky-600');
+            document.getElementById(`tab-${tabId}`).classList.remove('text-gray-500');
+            document.getElementById(`content-${tabId}`).classList.remove('hidden');
+        }
+
+        // Quiz Logic
+        const questions = [
+            {
+                question: "\"Bilim\" sózine qaysı qosımta jalǵansa \"adam\" mánisin bildiredi?",
+                options: ["-li", "-siz", "-paz", "-dan"],
+                correct: 2, // -paz (bilimpaz) usually, or strictly speaking -li (bilimli). Let's use a standard example.
+                // Let's change to a clearer example for standard grammar.
+                // "Balıq" -> "Balıqshı"
+            },
+            {
+                question: "\"Mektep\" sózine barıs septigi (-ǵa/-ge) jalǵansa qalay boladı?",
+                options: ["Mektepti", "Mektepte", "Mektepke", "Mektepten"],
+                correct: 2 // Mektepke
+            },
+            {
+                question: "\"Oqıwshı\" sóziniń kópshilik forması qaysı?",
+                options: ["Oqıwshıler", "Oqıwshılar", "Oqıwshıdar", "Oqıwshıtar"],
+                correct: 1 // Oqıwshılar
+            },
+            {
+                question: "\"Sóz jasawshı\" qosımta qaysı?",
+                options: ["-lar", "-nıń", "-shı", "-da"],
+                correct: 2 // -shı
+            },
+            {
+                question: "\"Meniń kitab...\" - bos orınǵa qaysı qosımta keledi?",
+                options: ["-ım", "-ıń", "-ı", "-ımız"],
+                correct: 0 // -ım
+            },
+            {
+                question: "Qaraqalpaq tilinde neshe septik bar?",
+                options: ["5", "6", "7", "4"],
+                correct: 1 // 6
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        function loadQuestion() {
+            const q = questions[currentQuestionIndex];
+            document.getElementById('question-text').innerText = q.question;
+            document.getElementById('question-counter').innerText = `Soraw: ${currentQuestionIndex + 1} / ${questions.length}`;
+            
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = '';
+
+            q.options.forEach((opt, index) => {
+                const btn = document.createElement('button');
+                btn.className = "w-full text-left p-4 rounded-lg border-2 border-gray-200 hover:border-sky-500 hover:bg-sky-50 transition font-medium text-lg";
+                btn.innerText = opt;
+                btn.onclick = () => checkAnswer(index, btn);
+                optionsContainer.appendChild(btn);
+            });
+
+            document.getElementById('next-btn').classList.add('hidden');
+        }
+
+        function checkAnswer(selectedIndex, btnElement) {
+            const q = questions[currentQuestionIndex];
+            const optionsContainer = document.getElementById('options-container');
+            const buttons = optionsContainer.getElementsByTagName('button');
+
+            // Disable all buttons
+            for(let btn of buttons) {
+                btn.disabled = true;
+                btn.classList.add('opacity-70', 'cursor-not-allowed');
+            }
+
+            if(selectedIndex === q.correct) {
+                btnElement.classList.remove('border-gray-200', 'hover:border-sky-500', 'hover:bg-sky-50');
+                btnElement.classList.add('bg-green-100', 'border-green-500', 'text-green-700');
+                btnElement.innerHTML += ' <i class="fas fa-check float-right mt-1"></i>';
+                score++;
+                document.getElementById('score-counter').innerText = `Durası: ${score}`;
+            } else {
+                btnElement.classList.remove('border-gray-200', 'hover:border-sky-500', 'hover:bg-sky-50');
+                btnElement.classList.add('bg-red-100', 'border-red-500', 'text-red-700');
+                btnElement.innerHTML += ' <i class="fas fa-times float-right mt-1"></i>';
+                
+                // Show correct answer
+                const correctBtn = buttons[q.correct];
+                correctBtn.classList.add('bg-green-100', 'border-green-500', 'text-green-700');
+            }
+
+            document.getElementById('next-btn').classList.remove('hidden');
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if(currentQuestionIndex < questions.length) {
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            document.getElementById('quiz-container').classList.add('hidden');
+            document.getElementById('result-screen').classList.remove('hidden');
+            
+            const percentage = (score / questions.length) * 100;
+            let message = "";
+            if(percentage === 100) message = "Ayyar! Bárin bilesiz!";
+            else if(percentage >= 80) message = "Júdá jaqsı!";
+            else if(percentage >= 50) message = "Jaman emes, biraq taǵı oqıw kerek.";
+            else message = "Qaytadan oqıp shıǵıw kerek.";
+
+            document.getElementById('final-score').innerHTML = `${score} / ${questions.length}<br><span class="text-sm font-normal text-gray-500">${message}</span>`;
+        }
+
+        function restartQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            document.getElementById('score-counter').innerText = `Durası: 0`;
+            document.getElementById('result-screen').classList.add('hidden');
+            document.getElementById('quiz-container').classList.remove('hidden');
+            loadQuestion();
+        }
+
+    </script>
+</body>
+</html>
